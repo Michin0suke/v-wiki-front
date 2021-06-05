@@ -68,6 +68,7 @@
     "@storybook/addon-essentials": "^6.1.21",
     "@storybook/addon-links": "^6.2.9",
     "@storybook/react": "^6.1.21",
+    "@types/styled-components": "^5.1.9",
     "babel-loader": "^8.2.2",
     "eslint-plugin-react-hooks": "^4.2.0"
   }

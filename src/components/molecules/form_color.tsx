@@ -2,8 +2,9 @@ import React, { useContext } from 'react'
 import chroma from 'chroma-js'
 import { BlockedText } from '~/components/atoms/blocked_text'
 import { ThemeColorContext } from '~/contexts/theme_colors'
-import { CircleSlider } from 'react-circle-slider'
 import { Block } from '../atoms/block'
+//@ts-ignore
+import { CircleSlider } from 'react-circle-slider'
 
 type Props = {
   keyText: string

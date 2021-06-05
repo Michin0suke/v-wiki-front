@@ -6,9 +6,6 @@ import { heightUnits, weightUnits } from '~/utils/units'
 import { artistFormState } from '~/atoms/artist_form'
 import { validate } from '~/utils/validate'
 import { ThemeColorContext } from '~/contexts/theme_colors'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEye as EyeSolid } from '@fortawesome/free-solid-svg-icons'
-import { faEye as EyeRegular } from '@fortawesome/free-regular-svg-icons'
 import { Wrapper } from '~/components/templates/wrapper'
 import { MainContents } from '~/components/templates/main_contents'
 import { SubContents } from '~/components/templates/sub_contents'
@@ -33,7 +30,6 @@ const Home = () => {
     themeLight: '#fff',
   })
   const [colors, setColors] = useRecoilState(colorsState)
-  const [isA11yMode, setIsA11yMode] = useState(false)
   const [artist, setArtist] = useRecoilState(artistFormState)
 
   const changeThemeColors = useCallback(

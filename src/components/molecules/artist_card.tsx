@@ -41,15 +41,15 @@ export const ArtistCard: React.FC<Props> = ({
       </div>
       <div className="flex flex-col items-start gap-1 justify-center pl-5 pt-1">
         <BorderedText className="flex-1">aaaaaaaaaabbbbbbbbbb</BorderedText>
-        <p className="">にじさんじ</p>
-        <p className="text-3xl">星川サラ</p>
-        <p className="">ほしかわさら</p>
+        <p className="">KAMITSUBAKI STUDIO</p>
+        <p className="text-3xl">花譜</p>
+        <p className="">かふ</p>
         <p>
           <FontAwesomeIcon
             icon={faTwitterSquare}
             className="text-lg align-middle"
           />
-          <span className="ml-2">@Sara_Hoshikawa</span>
+          <span className="ml-2">@virtual_kaf</span>
         </p>
       </div>
       {withDelBtn && (

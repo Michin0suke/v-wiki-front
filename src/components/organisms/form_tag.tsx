@@ -8,15 +8,12 @@ import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import { ThemeColorContext } from '~/contexts/theme_colors'
 import { FormText } from '../molecules/form_text'
 // import { ArtistForm } from '~/types/artist'
-import { SetRecoilState } from 'recoil'
 
 type Props = {
-  setArtistState: SetRecoilState
   className?: string
-  onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void
 }
 
-export const FormTag: React.FC<Props> = ({ setArtistState, className }) => {
+export const FormTag: React.FC<Props> = ({ className }) => {
   const { themeColors } = useContext(ThemeColorContext)
 
   return (

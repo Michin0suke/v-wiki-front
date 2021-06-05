@@ -23,8 +23,7 @@ export const FormArtists: React.FC<Props> = ({ className }) => {
             .map((_, key) => (
               <ArtistCard
                 key={key}
-                // profileImageSrc="https://pbs.twimg.com/profile_images/1390013726200242179/VAwzRB12_400x400.jpg"
-                profileImageSrc="https://images.unsplash.com/photo-1583512603805-3cc6b41f3edb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1100&q=80"
+                profileImageSrc="https://pbs.twimg.com/profile_images/1373651599357177862/aRgLHpGP_400x400.jpg"
                 withDelBtn
               />
             ))}
@@ -45,14 +44,14 @@ export const FormArtists: React.FC<Props> = ({ className }) => {
           <FormTextBlock
             keyText="名前"
             className="mt-2"
-            value={'星川サラ'}
+            value={'花譜'}
             onChange={() => {}}
           />
           <FormTextBlock
             keyText="Twitter ID"
             prefix="@"
             className="mt-2"
-            value={'Sara_Hoshikawa'}
+            value={'virtual_kaf'}
             onChange={() => {}}
           />
         </div>
@@ -62,8 +61,7 @@ export const FormArtists: React.FC<Props> = ({ className }) => {
             .map((_, key) => (
               <ArtistCard
                 key={key}
-                // profileImageSrc="https://pbs.twimg.com/profile_images/1390013726200242179/VAwzRB12_400x400.jpg"
-                profileImageSrc="https://images.unsplash.com/photo-1583512603805-3cc6b41f3edb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1100&q=80"
+                profileImageSrc="https://pbs.twimg.com/profile_images/1373651599357177862/aRgLHpGP_400x400.jpg"
               />
             ))}
         </div>

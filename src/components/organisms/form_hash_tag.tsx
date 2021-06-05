@@ -9,9 +9,7 @@ import { FormText } from '../molecules/form_text'
 import { HashTag } from '../molecules/hash_tag'
 
 type Props = {
-  values: string[]
   className?: string
-  onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void
 }
 
 export const FormHashTag: React.FC<Props> = ({ className }) => {

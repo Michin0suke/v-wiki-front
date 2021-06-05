@@ -22,7 +22,15 @@ const atomOptions: AtomOptions<ArtistForm> = {
       month: '',
       day: '',
     },
-    belongsName: [''],
+    belongs: [],
+    tags: [],
+    tagsForm: {
+      role: '',
+      name: '',
+      suggest: [],
+      twitterId: '',
+    },
+    hashTags: [],
   },
 }
 
