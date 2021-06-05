@@ -24,9 +24,8 @@ class CustomDocument extends Document implements CustomDocumentInterface {
         originalRenderPage({
           enhanceApp:
             (App) =>
-            (props): void => {
-              sheet.collectStyles(<App {...props} />)
-            },
+            (props): any =>
+              sheet.collectStyles(<App {...props} />),
         })
 
       const initialProps = await Document.getInitialProps(ctx)
