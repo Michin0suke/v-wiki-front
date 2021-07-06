@@ -1,9 +1,12 @@
 import { parse } from 'date-fns'
 
-const hankaku2Zenkaku = (str: string): string =>
-  str.replace(/[Ａ-Ｚａ-ｚ０-９]/g, (s) =>
-    String.fromCharCode(s.charCodeAt(0) - 0xfee0)
-  )
+const hankaku2Zenkaku = (str: string): string => {
+  return str
+    .toString()
+    .replace(/[Ａ-Ｚａ-ｚ０-９]/g, (s) =>
+      String.fromCharCode(s.charCodeAt(0) - 0xfee0)
+    )
+}
 
 export const validate = {
   unsignedInt: (text: string): string | null => {
@@ -19,8 +22,12 @@ export const validate = {
     return null
   },
 
-  text: (length: number) => (text: string): string | null =>
-    text.length > length ? `文字数は${length}以下である必要があります。` : null,
+  text:
+    (length: number) =>
+    (text: string): string | null =>
+      text.length > length
+        ? `文字数は${length}以下である必要があります。`
+        : null,
 
   twitterId: (text: string): string | null => {
     if (text !== '' && text.match(/^\w{1,15}$/) === null)

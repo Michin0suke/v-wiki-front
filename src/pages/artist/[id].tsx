@@ -18,8 +18,16 @@ import { FormSelectBlock } from '~/components/organisms/form_select_block'
 import { FormTag } from '~/components/organisms/form_tag'
 import { FormHashTag } from '~/components/organisms/form_hash_tag'
 import { colorsState } from '~/atoms/colors'
+import { apolloClient } from '~/graphql/client'
+import { QUERY_ARTIST } from '~/graphql/queries/artist'
 
-const Home = () => {
+export const getServerSideProps = async ({ params }) => {
+  return {
+    props: { id: params.id },
+  }
+}
+
+const Home = ({ id }) => {
   const [themeColors, setThemeColor] = useState<Colors>({
     base: '#fff',
     themeHue: 270,
@@ -31,6 +39,46 @@ const Home = () => {
   })
   const [colors, setColors] = useRecoilState(colorsState)
   const [artist, setArtist] = useRecoilState(artistFormState)
+
+  useEffect(() => {
+    apolloClient
+      .query({
+        query: QUERY_ARTIST,
+        variables: { id },
+      })
+      .then(({ data }) => {
+        const artist = data.artist
+        setArtist({
+          isV: artist.isV,
+          vType: artist.vType,
+          name: artist.name ?? '',
+          nameRuby: artist.nameRuby ?? '',
+          twitterId: artist.twitterId ?? '',
+          youtubeId: artist.youtubeId ?? '',
+          youtubeChannelUrl: artist.youtubeChannelUrl ?? '',
+          height: artist.height ?? '',
+          heightUnit: artist.heightUnit,
+          weight: artist.weight ?? '',
+          weightUnit: artist.weightUnit,
+          gender: artist.gender ?? '',
+          age: artist.age ?? '',
+          birthday: {
+            year: new Date(artist.birthday).getFullYear().toString(),
+            month: (new Date(artist.birthday).getMonth() + 1).toString(),
+            day: new Date(artist.birthday).getDate().toString(),
+          },
+          belongs: [],
+          tags: [],
+          tagsForm: {
+            role: '',
+            name: '',
+            suggest: [],
+            twitterId: '',
+          },
+          hashTags: [],
+        })
+      })
+  }, [])
 
   const changeThemeColors = useCallback(
     (hue: number) => {
