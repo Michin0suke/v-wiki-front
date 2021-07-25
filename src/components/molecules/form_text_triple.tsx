@@ -5,11 +5,8 @@ import { Block } from '../atoms/block'
 import { WarningText } from '../atoms/warning_text'
 
 type Props = {
-  keyText: string
   values: string[]
   className?: string
-  placeholders: string[]
-  suffixes: string[]
   textAlign?: 'left' | 'center' | 'right'
   onChanges: [
     (event: React.ChangeEvent<HTMLInputElement>) => void,
@@ -19,14 +16,13 @@ type Props = {
   validateFunc?: (values: string[]) => string | null
 }
 
-export const FormTextTriple: React.FC<Props> = ({
-  keyText,
-  placeholders,
+const placeholders = ['(省略可)', '', '']
+const suffixes = ['年', '月', '日']
+
+export const Birthday: React.FC<Props> = ({
   values,
   onChanges,
   className,
-  suffixes,
-  textAlign,
   validateFunc,
 }) => {
   if (
@@ -38,7 +34,7 @@ export const FormTextTriple: React.FC<Props> = ({
   return (
     <Block className={`${className}`}>
       <div className="flex gap-2">
-        <BlockedText>{keyText}</BlockedText>
+        <BlockedText>誕生日</BlockedText>
         {values.map((_, i) => (
           <InputText
             key={i}
@@ -46,7 +42,7 @@ export const FormTextTriple: React.FC<Props> = ({
             value={values[i]}
             onChange={onChanges[i]}
             suffix={suffixes[i]}
-            textAlign={textAlign}
+            textAlign="right"
           />
         ))}
       </div>

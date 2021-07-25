@@ -6,13 +6,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import { ThemeColorContext } from '~/contexts/theme_colors'
 import { FormText } from '../molecules/form_text'
-import { HashTag } from '../molecules/hash_tag'
+import { HashTag } from '../molecules/hashtag'
 
 type Props = {
   className?: string
 }
 
-export const FormHashTag: React.FC<Props> = ({ className }) => {
+export const HashTags: React.FC<Props> = ({ className }) => {
   const { themeColors } = useContext(ThemeColorContext)
   return (
     <Block className={`${className || ''}`}>

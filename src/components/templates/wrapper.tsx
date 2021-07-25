@@ -2,6 +2,8 @@ import React, { useContext } from 'react'
 import { ThemeColorContext } from '~/contexts/theme_colors'
 import { SuperEllipseClip } from '~/components/clips/super_ellipse'
 import { MenuButton } from '../organisms/menu_button'
+import { ApolloProvider } from '@apollo/client'
+import { client } from '~/graphql/client'
 
 type Props = {
   className?: string

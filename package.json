@@ -5,11 +5,12 @@
   "scripts": {
     "dev": "next dev -p 8080",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 8080",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx --ignore-path .gitignore .",
     "test": "jest src/__tests__/.*/*.test.tsx?$",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
+    "apollo-codegen": "apollo client:codegen --target typescript --passthroughCustomScalars --globalTypesFile=src/graphql/globalTypes/globalTypes.ts",
     "puppeteer-storyshots": "jest src/__tests__/puppeteer-storyshots*.runner.ts"
   },
   "husky": {

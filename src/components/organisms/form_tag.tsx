@@ -13,7 +13,7 @@ type Props = {
   className?: string
 }
 
-export const FormTag: React.FC<Props> = ({ className }) => {
+export const Tags: React.FC<Props> = ({ className }) => {
   const { themeColors } = useContext(ThemeColorContext)
 
   return (

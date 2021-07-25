@@ -10,6 +10,7 @@ type Props = {
 
 export const HashTag: React.FC<Props> = ({ description, name, className }) => {
   const { themeColors } = useContext(ThemeColorContext)
+
   return (
     <div
       className={`flex items-center rounded-lg py-2 px-3 ${className}`}

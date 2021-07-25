@@ -4,14 +4,14 @@ import { ThemeColorContext } from '~/contexts/theme_colors'
 import { InnerBorder } from '~/components/atoms/inner_border'
 import { Block } from '~/components/atoms/block'
 import { BlockedText } from '~/components/atoms/blocked_text'
-import { FormTextBlock } from './form_text_block'
 import { FormSelect } from '../molecules/form_select'
+import { FormText } from '../molecules/form_text'
 
 type Props = {
   className?: string
 }
 
-export const FormArtists: React.FC<Props> = ({ className }) => {
+export const RelatedArtists: React.FC<Props> = ({ className }) => {
   const { themeColors } = useContext(ThemeColorContext)
   return (
     <Block className={`${className}`}>
@@ -37,17 +37,24 @@ export const FormArtists: React.FC<Props> = ({ className }) => {
           }}
         >
           <FormSelect
-            keyText="役割"
-            values={['作曲', '作詞', 'ギター', '新規作成']}
+            keyText="関連の種類"
+            values={[
+              '→所属グループ（←所属アーティスト）',
+              '作詞',
+              'ギター',
+              '新規作成',
+            ]}
             onChange={() => {}}
           />
-          <FormTextBlock
-            keyText="名前"
-            className="mt-2"
-            value={'花譜'}
-            onChange={() => {}}
-          />
-          <FormTextBlock
+        </div>
+        <div
+          className="mt-2 p-2 rounded"
+          style={{
+            backgroundColor: themeColors.base,
+          }}
+        >
+          <FormText keyText="名前" value={'花譜'} onChange={() => {}} />
+          <FormText
             keyText="Twitter ID"
             prefix="@"
             className="mt-2"

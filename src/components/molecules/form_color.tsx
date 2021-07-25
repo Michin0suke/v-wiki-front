@@ -28,7 +28,6 @@ export const FormColor: React.FC<Props> = ({
           {chroma(themeColors.theme).hex()}
         </span>
       </div>
-      {/* <InputColor {...{ value, onChange }} className="ml-2" /> */}
 
       <div className="flex justify-center">
         <CircleSlider

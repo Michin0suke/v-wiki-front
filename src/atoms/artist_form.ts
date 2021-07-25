@@ -1,9 +1,10 @@
 import { atom, AtomOptions, RecoilState } from 'recoil'
-import { ArtistForm } from '~/types/artist'
+import { ArtistForm } from '~/models/artist/components/artist'
 
 const atomOptions: AtomOptions<ArtistForm> = {
   key: 'artist_form',
   default: {
+    id: null,
     isV: true,
     vType: 'Vtuber',
     name: '',
@@ -17,12 +18,13 @@ const atomOptions: AtomOptions<ArtistForm> = {
     weightUnit: 'kg',
     gender: '',
     age: '',
+    themeHue: 270,
     birthday: {
       year: '',
       month: '',
       day: '',
     },
-    belongs: [],
+    relatedArtists: [],
     tags: [],
     tagsForm: {
       role: '',
@@ -30,7 +32,7 @@ const atomOptions: AtomOptions<ArtistForm> = {
       suggest: [],
       twitterId: '',
     },
-    hashTags: [],
+    HashTagss: [],
   },
 }
 

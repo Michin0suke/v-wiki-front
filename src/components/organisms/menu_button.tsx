@@ -11,7 +11,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { faTwitter } from '@fortawesome/free-brands-svg-icons'
 import { useRecoilState } from 'recoil'
-import { colorsState } from '~/atoms/colors'
+import { userSettingState } from '~/atoms/user-setting'
 
 type Props = {
   className?: string
@@ -19,7 +19,7 @@ type Props = {
 
 export const MenuButton: React.FC<Props> = ({ className }) => {
   const [isExpand, setIsExpand] = useState(false)
-  const [colors, setColors] = useRecoilState(colorsState)
+  const [userSetting, setUserSetting] = useRecoilState(userSettingState)
   return (
     <div className={`${className ?? ''}`}>
       {isExpand ? (
@@ -30,7 +30,10 @@ export const MenuButton: React.FC<Props> = ({ className }) => {
           <Button
             className="w-20 h-20 shadow-2xl"
             onClick={() =>
-              setColors({ ...colors, isA11yMode: !colors.isA11yMode })
+              setUserSetting({
+                ...userSetting,
+                isA11yMode: !userSetting.isA11yMode,
+              })
             }
           >
             <FontAwesomeIcon icon={faEye} size={'2x'} />

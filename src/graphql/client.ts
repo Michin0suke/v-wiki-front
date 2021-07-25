@@ -1,7 +1,7 @@
 import { ApolloClient, InMemoryCache, HttpLink } from '@apollo/client'
 import fetch from 'cross-fetch'
 
-export const apolloClient = new ApolloClient({
+export const client = new ApolloClient({
   link: new HttpLink({ uri: 'http://localhost:3000/graphql', fetch }),
   // uri: 'https://api.vtuber-music.com/graphql',
   // uri: 'http://vtuber-music.test/graphql',

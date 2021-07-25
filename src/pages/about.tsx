@@ -7,8 +7,10 @@ const About = () => {
   return (
     <Wrapper>
       <MainContents>
-        <h2>アバウト</h2>
-        <Link href="artist">アーティスト編集</Link>
+        <>
+          <h2>アバウト</h2>
+          <Link href="artist">アーティスト編集</Link>
+        </>
       </MainContents>
     </Wrapper>
   )

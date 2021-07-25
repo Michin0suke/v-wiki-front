@@ -1,7 +1,6 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
-import React, { JSXElementConstructor } from 'react'
-import { NextPageContext } from 'next'
+import React from 'react'
 
 interface CustomDocumentInterface {
   url: string
@@ -14,7 +13,6 @@ class CustomDocument extends Document implements CustomDocumentInterface {
   title = 'Demo Next.js'
   description = 'Demo of Next.js'
 
-  //
   static async getInitialProps(ctx: any): Promise<any> {
     const sheet = new ServerStyleSheet()
     const originalRenderPage = ctx.renderPage
@@ -23,8 +21,8 @@ class CustomDocument extends Document implements CustomDocumentInterface {
       ctx.renderPage = (): any =>
         originalRenderPage({
           enhanceApp:
-            (App) =>
-            (props): any =>
+            (App: any) =>
+            (props: any): any =>
               sheet.collectStyles(<App {...props} />),
         })
 

@@ -7,6 +7,7 @@ type Props = {
   values: string[]
   className?: string
   onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void
+  onClick?: (event: React.TouchEvent) => void
   keyText?: string
 }
 

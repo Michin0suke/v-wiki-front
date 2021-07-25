@@ -1,5 +1,4 @@
 module.exports = {
-  // 整形を効かせたいファイルなので除外を解除
   ignorePatterns: ['!.eslintrc.js', '!.babelrc.js', '!.storybook/**/*.(js|ts)'],
   extends: [
     'eslint:recommended',
@@ -31,7 +30,6 @@ module.exports = {
     'react/prop-types': 'off',
     'react/react-in-jsx-scope': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
-    // 型定義でunused-varsを出さない
     'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': ['error'],
   },

@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client'
 
-export const QUERY_ARTIST = gql`
-  query ($id: String!) {
-    artist(id: $id) {
+export const QueryArtistsGql = gql`
+  query QueryArtists {
+    artists {
       id
       name
       isV
@@ -14,6 +14,7 @@ export const QUERY_ARTIST = gql`
       profile
       birthday
       age
+      themeHue
       height
       heightUnit
       weight

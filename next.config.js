@@ -10,6 +10,7 @@ const nextConfig = {
     config.resolve.alias['~'] = resolve(__dirname, 'src')
     return config
   },
+  reactStrictMode: true,
 }
 
 module.exports = nextConfig

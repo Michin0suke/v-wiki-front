@@ -66,6 +66,15 @@ export const validate = {
     return null
   },
 
+  hue: (text: string): string | null => {
+    const hankaku = hankaku2Zenkaku(text)
+    const int = parseInt(hankaku, 10)
+    if (!int) return '色相は整数値である必要があります。'
+    if (int < 0 || 360 < int)
+      return '色相は0以上360以下の整数値である必要があります。'
+    return null
+  },
+
   artist: {
     vType: (text: string): string | null => validate.text(15)(text),
     name: (text: string): string | null => validate.text(30)(text),

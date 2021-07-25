@@ -1,14 +1,5 @@
 import chroma from 'chroma-js'
-
-export type Colors = {
-  themeHue: number
-  base: string
-  theme: string
-  themeAA: string
-  themeAAA: string
-  themeOppositeAAA: string
-  themeLight: string
-}
+import { Colors } from '~/types/colors'
 
 // 背景色、色相、彩度、満たしたいコントラスト比を渡すと、それを満たす色(16進数)を返す
 const getChromaFromHue = (
@@ -38,7 +29,6 @@ const getChromaFromHue = (
 export const getColors = (hue: number, isA11yMode: boolean): Colors => {
   if (isA11yMode) {
     return {
-      themeHue: hue,
       base: '#fff',
       theme: getChromaFromHue('#fff', hue, 0.7, 1.7).hex(),
       themeAA: getChromaFromHue('#fff', hue, 0.5, 4.5).hex(),
@@ -53,7 +43,6 @@ export const getColors = (hue: number, isA11yMode: boolean): Colors => {
     }
   }
   return {
-    themeHue: hue,
     base: '#fff',
     theme: getChromaFromHue('#fff', hue, 0.7, 1.2).hex(),
     themeAA: getChromaFromHue('#fff', hue, 0.7, 2.2).hex(),
