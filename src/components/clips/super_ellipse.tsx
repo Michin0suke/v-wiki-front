@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const SuperEllipseClip = () => (
+export const SuperEllipseClip: React.FC = () => (
   <svg height={0} width={0}>
     <clipPath id="super-ellipse" clipPathUnits="objectBoundingBox">
       <path

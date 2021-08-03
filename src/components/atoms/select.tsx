@@ -1,19 +1,25 @@
-import React, { useContext } from 'react'
-import { ThemeColorContext } from '~/contexts/theme_colors'
+import React from 'react'
 
 export type SelectProps = {
   values: string[]
+  textColor: string
+  backgroundColor: string
   className?: string
   onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void
 }
 
-export const Select = ({ values, className, onChange }: SelectProps) => {
-  const { themeColors } = useContext(ThemeColorContext)
+export const Select = ({
+  values,
+  className,
+  onChange,
+  textColor,
+  backgroundColor,
+}: SelectProps) => {
   return (
     <select
       style={{
-        color: themeColors.base,
-        backgroundColor: themeColors.themeAA,
+        color: textColor,
+        backgroundColor: backgroundColor,
       }}
       className={`w-full rounded py-1 px-1.5 ${className}`}
       value={values[0]}

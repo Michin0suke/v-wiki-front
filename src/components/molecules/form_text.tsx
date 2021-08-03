@@ -1,12 +1,14 @@
 import React from 'react'
 import { BlockedText } from '~/components/atoms/blocked_text'
 import { InputText } from '~/components/atoms/input_text'
+import { Colors } from '~/types/colors'
 import { Block } from '../atoms/block'
 import { WarningText } from '../atoms/warning_text'
 
 type Props = {
   keyText?: string
   value: string
+  colors: Colors
   className?: string
   placeholder?: string
   prefix?: string
@@ -26,6 +28,7 @@ export const FormText: React.FC<Props> = ({
   prefix,
   suffix,
   textAlign,
+  colors,
   onChange,
   onChangeSuffix,
   naked,
@@ -34,9 +37,14 @@ export const FormText: React.FC<Props> = ({
   const contents = (
     <>
       <div className="flex gap-2">
-        {keyText && <BlockedText>{keyText}</BlockedText>}
+        {keyText && (
+          <BlockedText backgroundColor={colors.themeAA} textColor="#fff">
+            {keyText}
+          </BlockedText>
+        )}
         <InputText
           {...{
+            colors,
             placeholder,
             value,
             prefix,
@@ -48,13 +56,17 @@ export const FormText: React.FC<Props> = ({
         />
       </div>
       {validateFunc && validateFunc(value) !== null && (
-        <WarningText className="ml-2 mt-2">※{validateFunc(value)}</WarningText>
+        <WarningText color={colors.themeOppositeAAA} className="ml-2 mt-2">
+          ※{validateFunc(value)}
+        </WarningText>
       )}
     </>
   )
   return naked ? (
     <div>{contents}</div>
   ) : (
-    <Block className={`${className}`}>{contents}</Block>
+    <Block className={`${className}`} backgroundColor={colors.theme}>
+      {contents}
+    </Block>
   )
 }

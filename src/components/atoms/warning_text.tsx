@@ -1,18 +1,21 @@
-import React, { useContext } from 'react'
-import { ThemeColorContext } from '~/contexts/theme_colors'
+import React from 'react'
 
 type Props = {
   className?: string
   children: React.ReactNode
+  color: string
 }
 
-export const WarningText: React.FC<Props> = ({ className, children }) => {
-  const { themeColors } = useContext(ThemeColorContext)
+export const WarningText: React.FC<Props> = ({
+  className,
+  children,
+  color,
+}) => {
   return (
     <span
       className={`inline-block ${className}`}
       style={{
-        color: themeColors.themeOppositeAAA,
+        color: color,
       }}
     >
       {children}

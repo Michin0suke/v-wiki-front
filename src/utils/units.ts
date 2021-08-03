@@ -1,4 +1,4 @@
-import { WeightUnit, HeightUnit } from '~/models/artist/util/units'
+import { WeightUnit, HeightUnit } from '~/model/artist/shared/units'
 
 export const weightUnits: WeightUnit[] = [
   't',

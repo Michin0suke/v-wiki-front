@@ -1,8 +1,9 @@
-import React, { useContext } from 'react'
-import { ThemeColorContext } from '~/contexts/theme_colors'
+import React from 'react'
+import { Colors } from '~/types/colors'
 
-export type InputTextProps = {
+type Props = {
   value: string
+  colors: Colors
   placeholder?: string
   className?: string
   prefix?: string
@@ -12,8 +13,9 @@ export type InputTextProps = {
   onChangeSuffix?: (event: React.ChangeEvent<HTMLSelectElement>) => void
 }
 
-export const InputText = ({
+export const InputText: React.FC<Props> = ({
   value,
+  colors,
   placeholder,
   className,
   prefix,
@@ -21,15 +23,14 @@ export const InputText = ({
   textAlign,
   onChange,
   onChangeSuffix,
-}: InputTextProps) => {
-  const { themeColors } = useContext(ThemeColorContext)
+}: Props) => {
   return (
     <label className={`flex w-full overflow-hidden rounded ${className}`}>
       {prefix && (
         <span
           style={{
-            color: themeColors.base,
-            backgroundColor: themeColors.themeAA,
+            color: colors.base,
+            backgroundColor: colors.themeAA,
           }}
           className="py-1 px-1.5"
         >
@@ -40,8 +41,8 @@ export const InputText = ({
         className={`py-1 px-1.5 w-full`}
         type="text"
         style={{
-          color: themeColors.themeAAA,
-          backgroundColor: themeColors.base,
+          color: colors.themeAAA,
+          backgroundColor: colors.base,
           textAlign,
         }}
         {...{ value, placeholder, onChange }}
@@ -49,8 +50,8 @@ export const InputText = ({
       {suffix && Array.isArray(suffix) === false && (
         <span
           style={{
-            color: themeColors.base,
-            backgroundColor: themeColors.themeAA,
+            color: colors.base,
+            backgroundColor: colors.themeAA,
           }}
           className="py-1 px-1.5"
         >
@@ -60,8 +61,8 @@ export const InputText = ({
       {suffix && Array.isArray(suffix) && (
         <select
           style={{
-            color: themeColors.base,
-            backgroundColor: themeColors.themeAA,
+            color: colors.base,
+            backgroundColor: colors.themeAA,
           }}
           className="py-1 px-1.5"
           value={suffix[0]}

@@ -1,32 +1,25 @@
-import React, { useContext } from 'react'
-import { ThemeColorContext } from '~/contexts/theme_colors'
+import React from 'react'
 
-export type BlockedTextProps = {
+export type Props = {
   className?: string
   children: string
-  baseColor?: boolean
+  textColor: string
+  backgroundColor: string
 }
 
-export const BlockedText = ({
+export const BlockedText: React.FC<Props> = ({
   children,
   className,
-  baseColor,
-}: BlockedTextProps) => {
-  const { themeColors } = useContext(ThemeColorContext)
+  textColor,
+  backgroundColor,
+}: Props) => {
   return (
     <span
       className={`py-1 px-1.5 whitespace-nowrap rounded inline-block ${className}`}
-      style={
-        baseColor
-          ? {
-              color: themeColors.themeAAA,
-              backgroundColor: themeColors.base,
-            }
-          : {
-              color: themeColors.base,
-              backgroundColor: themeColors.themeAA,
-            }
-      }
+      style={{
+        color: textColor,
+        backgroundColor,
+      }}
     >
       {children}
     </span>

@@ -1,14 +1,15 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import chroma from 'chroma-js'
 import { BlockedText } from '~/components/atoms/blocked_text'
-import { ThemeColorContext } from '~/contexts/theme_colors'
 import { Block } from '../atoms/block'
 //@ts-ignore
 import { CircleSlider } from 'react-circle-slider'
+import { Colors } from '~/types/colors'
 
 type Props = {
   keyText: string
   value: number
+  colors: Colors
   className?: string
   onChange: (value: number) => void
 }
@@ -16,16 +17,18 @@ type Props = {
 export const FormColor: React.FC<Props> = ({
   keyText,
   value,
+  colors,
   onChange,
   className,
 }) => {
-  const { themeColors } = useContext(ThemeColorContext)
   return (
-    <Block className={className}>
+    <Block className={className} backgroundColor={colors.theme}>
       <div className="flex justify-between">
-        <BlockedText>{keyText}</BlockedText>
-        <span style={{ color: themeColors.themeAAA }}>
-          {chroma(themeColors.theme).hex()}
+        <BlockedText backgroundColor={colors.themeAA} textColor={'#fff'}>
+          {keyText}
+        </BlockedText>
+        <span style={{ color: colors.themeAAA }}>
+          {chroma(colors.theme).hex()}
         </span>
       </div>
 
@@ -36,9 +39,9 @@ export const FormColor: React.FC<Props> = ({
           max={360}
           showTooltip={true}
           onChange={onChange}
-          progressColor={themeColors.base}
-          tooltipColor={themeColors.themeAAA}
-          knobColor={themeColors.themeAA}
+          progressColor={colors.base}
+          tooltipColor={colors.themeAAA}
+          knobColor={colors.themeAA}
         />
       </div>
     </Block>

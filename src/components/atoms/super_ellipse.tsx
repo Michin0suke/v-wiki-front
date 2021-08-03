@@ -5,7 +5,7 @@ type Props = {
   className?: string
 }
 
-export const SuperEllipse = ({ className, fill }: Props) => {
+export const SuperEllipse: React.FC<Props> = ({ className, fill }: Props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

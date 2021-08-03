@@ -12,22 +12,32 @@ import {
 import { faTwitter } from '@fortawesome/free-brands-svg-icons'
 import { useRecoilState } from 'recoil'
 import { userSettingState } from '~/atoms/user-setting'
+import { Colors } from '~/types/colors'
 
 type Props = {
+  colors: Colors
   className?: string
 }
 
-export const MenuButton: React.FC<Props> = ({ className }) => {
+export const MenuButton: React.FC<Props> = ({ colors, className }) => {
   const [isExpand, setIsExpand] = useState(false)
   const [userSetting, setUserSetting] = useRecoilState(userSettingState)
   return (
     <div className={`${className ?? ''}`}>
       {isExpand ? (
         <div className="flex flex-col gap-3">
-          <Button className="w-20 h-20 shadow-2xl">
+          <Button
+            backgroundColor={colors.themeAA}
+            textColor={'#fff'}
+            borderColor={colors.themeAA}
+            className="w-20 h-20 shadow-2xl"
+          >
             <FontAwesomeIcon icon={faTwitter} size={'2x'} />
           </Button>
           <Button
+            backgroundColor={colors.themeAA}
+            textColor={'#fff'}
+            borderColor={colors.themeAA}
             className="w-20 h-20 shadow-2xl"
             onClick={() =>
               setUserSetting({
@@ -39,16 +49,29 @@ export const MenuButton: React.FC<Props> = ({ className }) => {
             <FontAwesomeIcon icon={faEye} size={'2x'} />
           </Button>
           <Link href={'/create'}>
-            <Button className="w-20 h-20 shadow-2xl">
+            <Button
+              backgroundColor={colors.themeAA}
+              textColor={'#fff'}
+              borderColor={colors.themeAA}
+              className="w-20 h-20 shadow-2xl"
+            >
               <FontAwesomeIcon icon={faEdit} size={'2x'} />
             </Button>
           </Link>
           <Link href={'/about'}>
-            <Button className="w-20 h-20 shadow-2xl">
+            <Button
+              backgroundColor={colors.themeAA}
+              textColor={'#fff'}
+              borderColor={colors.themeAA}
+              className="w-20 h-20 shadow-2xl"
+            >
               <FontAwesomeIcon icon={faQuestion} size={'2x'} />
             </Button>
           </Link>
           <Button
+            backgroundColor={colors.themeAA}
+            textColor={'#fff'}
+            borderColor={colors.themeAA}
             className="w-20 h-20 shadow-2xl"
             onClick={() => setIsExpand(false)}
           >
@@ -57,6 +80,9 @@ export const MenuButton: React.FC<Props> = ({ className }) => {
         </div>
       ) : (
         <Button
+          backgroundColor={colors.themeAA}
+          textColor={'#fff'}
+          borderColor={colors.themeAA}
           className="w-20 h-20 shadow-2xl"
           onClick={() => setIsExpand(true)}
         >

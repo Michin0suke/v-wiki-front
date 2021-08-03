@@ -1,26 +1,36 @@
-import React, { useContext } from 'react'
-import { ThemeColorContext } from '~/contexts/theme_colors'
+import React from 'react'
+import { Colors } from '~/types/colors'
 import { BorderedText } from '../atoms/bordered_text'
 
 type Props = {
   description: string
   name: string
+  colors: Colors
   className?: string
 }
 
-export const HashTag: React.FC<Props> = ({ description, name, className }) => {
-  const { themeColors } = useContext(ThemeColorContext)
-
+export const HashTag: React.FC<Props> = ({
+  description,
+  name,
+  colors,
+  className,
+}) => {
   return (
     <div
-      className={`flex items-center rounded-lg py-2 px-3 ${className}`}
+      className={`flex items-center rounded-lg py-1 px-3 ${className}`}
       style={{
-        color: themeColors.themeAAA,
-        backgroundColor: themeColors.base,
+        color: '#fff',
+        backgroundColor: colors.themeAA,
       }}
     >
       <span>{description}</span>
-      <BorderedText className="ml-2" rounded>
+      <BorderedText
+        className="ml-2 py-1"
+        backgroundColor={'#fff'}
+        borderColor={colors.themeAA}
+        textColor={colors.themeAAA}
+        rounded
+      >
         {'＃' + name}
       </BorderedText>
     </div>

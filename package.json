@@ -10,7 +10,7 @@
     "test": "jest src/__tests__/.*/*.test.tsx?$",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "apollo-codegen": "apollo client:codegen --target typescript --passthroughCustomScalars --globalTypesFile=src/graphql/globalTypes/globalTypes.ts",
+    "apollo-codegen": "apollo client:codegen --target typescript --passthroughCustomScalars --globalTypesFile=src/infrastructure/shared/globalTypes.ts",
     "puppeteer-storyshots": "jest src/__tests__/puppeteer-storyshots*.runner.ts"
   },
   "husky": {

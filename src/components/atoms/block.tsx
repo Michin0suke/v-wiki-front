@@ -1,18 +1,17 @@
-import React, { useContext } from 'react'
-import { ThemeColorContext } from '~/contexts/theme_colors'
+import React from 'react'
 
 type Props = {
   className?: string
   children: React.ReactNode
+  backgroundColor: string
 }
 
-export const Block = ({ className, children }: Props) => {
-  const { themeColors } = useContext(ThemeColorContext)
+export const Block = ({ className, children, backgroundColor }: Props) => {
   return (
     <div
       className={`p-2 rounded ${className}`}
       style={{
-        backgroundColor: themeColors.theme,
+        backgroundColor,
       }}
     >
       {children}

@@ -1,11 +1,13 @@
 import React from 'react'
 import { BlockedText } from '~/components/atoms/blocked_text'
 import { InputText } from '~/components/atoms/input_text'
+import { Colors } from '~/types/colors'
 import { Block } from '../atoms/block'
 import { WarningText } from '../atoms/warning_text'
 
 type Props = {
   values: string[]
+  colors: Colors
   className?: string
   textAlign?: 'left' | 'center' | 'right'
   onChanges: [
@@ -21,6 +23,7 @@ const suffixes = ['年', '月', '日']
 
 export const Birthday: React.FC<Props> = ({
   values,
+  colors,
   onChanges,
   className,
   validateFunc,
@@ -32,12 +35,15 @@ export const Birthday: React.FC<Props> = ({
     return null
   }
   return (
-    <Block className={`${className}`}>
+    <Block className={`${className}`} backgroundColor={colors.theme}>
       <div className="flex gap-2">
-        <BlockedText>誕生日</BlockedText>
+        <BlockedText backgroundColor={colors.themeAA} textColor="#fff">
+          誕生日
+        </BlockedText>
         {values.map((_, i) => (
           <InputText
             key={i}
+            colors={colors}
             placeholder={placeholders[i]}
             value={values[i]}
             onChange={onChanges[i]}
@@ -47,7 +53,9 @@ export const Birthday: React.FC<Props> = ({
         ))}
       </div>
       {validateFunc && validateFunc(values) !== null && (
-        <WarningText className="ml-2 mt-2">※{validateFunc(values)}</WarningText>
+        <WarningText color={colors.themeOppositeAAA} className="ml-2 mt-2">
+          ※{validateFunc(values)}
+        </WarningText>
       )}
     </Block>
   )

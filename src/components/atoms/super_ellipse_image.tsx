@@ -5,7 +5,10 @@ type Props = {
   className?: string
 }
 
-export const SuperEllipseImage = ({ className, src }: Props) => (
+export const SuperEllipseImage: React.FC<Props> = ({
+  className,
+  src,
+}: Props) => (
   <img
     src={src}
     className={`${className}`}
