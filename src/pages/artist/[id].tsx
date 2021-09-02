@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { HeightUnit, WeightUnit } from '~/model/artist/shared/units'
 import { heightUnits, weightUnits } from '~/utils/units'
 import { validate } from '~/model/artist/shared/validate'
@@ -13,16 +13,11 @@ import { FormText } from '~/components/molecules/form_text'
 import { FormColor } from '~/components/molecules/form_color'
 import { Birthday } from '~/components/molecules/form_text_triple'
 import { useMutation, useQuery } from '@apollo/client'
-import { QueryArtistForUpdate } from '~/model/artist/artist-form/graphql/__generated__/QueryArtistForUpdate'
-import { QueryArtistForUpdateGql } from '~/infrastructure/artist/graphql/query-artist'
-import { artistGraphqlToForm } from '~/model/artist/artist-form/artist-graphql-to-form'
-import { artistFormToGraphql } from '~/model/artist/artist-form/artist-form-to-graphql'
-import { ArtistUpdateForm } from '~/model/artist/artist-form/artist-update-form'
-import { ArtistUpdateFormDefault } from '~/model/artist/artist-form/artist-update-form-default'
-import { UpdateArtistGql } from '~/infrastructure/artist/graphql/update-artist'
-import { UpdateArtist } from '~/model/artist/artist-form/graphql/__generated__/UpdateArtist'
 import { SubContents } from '~/components/templates/sub_contents'
 import { getColors } from '~/utils/theme_colors'
+import { artistService } from '~/usecase/artist/artist-service'
+import { Artist } from '~/domain/artist/entity/artist'
+import { useRouter } from 'next/router'
 
 export const getServerSideProps = async ({ params }: { params: any }) => {
   return {
@@ -31,86 +26,74 @@ export const getServerSideProps = async ({ params }: { params: any }) => {
 }
 
 const Artist = ({ id }: { id: string }) => {
-  const [artistFormState, setArtistFormState] = useState<ArtistUpdateForm>(
-    ArtistUpdateFormDefault
-  )
+  const [artist, setArtist] = useState<Artist | null>(null)
+  const router = useRouter()
 
-  const { data, loading, refetch } = useQuery<QueryArtistForUpdate>(
-    QueryArtistForUpdateGql,
-    {
-      variables: {
-        id,
-      },
-      onCompleted: ({ artist }) => {
-        artist && setArtistFormState(artistGraphqlToForm(artist))
-      },
-      notifyOnNetworkStatusChange: true,
+  const fetchArtist = async () => {
+    const fetchedArtist = await artistService().findById(id)
+    if (fetchedArtist) {
+      setArtist(fetchedArtist)
+    } else {
+      router.push('/')
     }
-  )
+  }
 
-  const [updateArtist, { loading: LoadingUpdate }] = useMutation<UpdateArtist>(
-    UpdateArtistGql,
-    {
-      onCompleted: ({ update }) =>
-        data?.artist &&
-        setArtistFormState(
-          artistGraphqlToForm({
-            ...update,
-            relatedArtists: data.artist.relatedArtists,
-          })
-        ),
-    }
-  )
+  useEffect(() => {
+    fetchArtist()
+  }, [])
 
   return (
-    <Wrapper colors={artistFormState.colors}>
+    <Wrapper colors={artist?.properties().colors}>
       <SubContents
-        colors={artistFormState.colors}
+        colors={artist?.properties().colors}
         className="my-5 mx-7 hidden lg:block"
       >
         <div
           className="w-full rounded-lg mt-6 p-5"
           style={{
-            backgroundColor: artistFormState.colors.theme,
-            color: artistFormState.colors.themeAAA,
+            backgroundColor: artist?.properties().colors.theme,
+            color: artist?.properties().colors.themeAAA,
           }}
         >
-          <pre>{JSON.stringify(artistFormState, null, 2)}</pre>
+          <pre>{JSON.stringify(artist?.properties(), null, 2)}</pre>
           <pre>{JSON.stringify(data, null, 2)}</pre>
-          <pre>{JSON.stringify(artistFormState, null, 2)}</pre>
+          <pre>{JSON.stringify(artist?.properties(), null, 2)}</pre>
         </div>
       </SubContents>
-      <MainContents colors={artistFormState.colors} className="mx-auto pt-3">
+      <MainContents
+        colors={artist?.properties().colors}
+        className="mx-auto pt-3"
+      >
         <div>
           <HeadingH2
-            colors={artistFormState.colors}
+            colors={artist?.properties().colors}
             text="アーティスト編集"
             className="-mt-5"
           />
           <div className="flex flex-col gap-7 pt-4">
             <div className="flex flex-col gap-2">
               <FormSelect
-                colors={artistFormState.colors}
+                colors={artist?.properties().colors}
                 values={
-                  artistFormState.isV
+                  artist?.properties().isV
                     ? ['バーチャルな存在である', 'バーチャルな存在ではない']
                     : ['バーチャルな存在ではない', 'バーチャルな存在である']
                 }
                 onChange={(e) =>
-                  setArtistFormState({
-                    ...artistFormState,
+                  setartist?.properties()({
+                    ...artist?.properties(),
                     isV: e.target.value === 'バーチャルな存在である',
                   })
                 }
               />
-              {artistFormState.isV && (
+              {artist?.properties().isV && (
                 <FormText
-                  colors={artistFormState.colors}
+                  colors={artist?.properties().colors}
                   keyText={'Vの種類'}
-                  value={artistFormState.vType}
+                  value={artist?.properties().vType}
                   onChange={(e) =>
-                    setArtistFormState({
-                      ...artistFormState,
+                    setartist?.properties()({
+                      ...artist?.properties(),
                       vType: e.target.value,
                     })
                   }
@@ -118,36 +101,36 @@ const Artist = ({ id }: { id: string }) => {
                 />
               )}
               <FormText
-                colors={artistFormState.colors}
+                colors={artist?.properties().colors}
                 keyText={'名前'}
-                value={artistFormState.name}
+                value={artist?.properties().name}
                 onChange={(e) =>
-                  setArtistFormState({
-                    ...artistFormState,
+                  setartist?.properties()({
+                    ...artist?.properties(),
                     name: e.target.value,
                   })
                 }
                 validateFunc={validate.artist.name}
               />
               <FormText
-                colors={artistFormState.colors}
+                colors={artist?.properties().colors}
                 keyText={'名前 (ふりがな)'}
-                value={artistFormState.nameRuby}
+                value={artist?.properties().nameRuby}
                 onChange={(e) =>
-                  setArtistFormState({
-                    ...artistFormState,
+                  setartist?.properties()({
+                    ...artist?.properties(),
                     nameRuby: e.target.value,
                   })
                 }
                 validateFunc={validate.artist.nameRuby}
               />
               <FormText
-                colors={artistFormState.colors}
+                colors={artist?.properties().colors}
                 keyText="Twitter ID"
-                value={artistFormState.twitterId}
+                value={artist?.properties().twitterId}
                 onChange={(e) =>
-                  setArtistFormState({
-                    ...artistFormState,
+                  setartist?.properties()({
+                    ...artist?.properties(),
                     twitterId: e.target.value,
                   })
                 }
@@ -155,43 +138,45 @@ const Artist = ({ id }: { id: string }) => {
                 validateFunc={validate.twitterId}
               />
               <FormText
-                colors={artistFormState.colors}
+                colors={artist?.properties().colors}
                 keyText="身長"
-                value={artistFormState.height}
+                value={artist?.properties().height}
                 onChange={(e) =>
-                  setArtistFormState({
-                    ...artistFormState,
+                  setartist?.properties()({
+                    ...artist?.properties(),
                     height: e.target.value,
                   })
                 }
                 onChangeSuffix={(e) => {
-                  setArtistFormState({
-                    ...artistFormState,
+                  setartist?.properties()({
+                    ...artist?.properties(),
                     heightUnit: e.target.value as HeightUnit,
                   })
                 }}
-                suffix={[artistFormState.heightUnit, ...heightUnits].filter(
-                  (x, i, self) => self.indexOf(x) === i
-                )}
+                suffix={[
+                  artist?.properties().heightUnit,
+                  ...heightUnits,
+                ].filter((x, i, self) => self.indexOf(x) === i)}
                 textAlign="right"
                 validateFunc={validate.unsignedInt}
               />
               <FormText
-                colors={artistFormState.colors}
+                colors={artist?.properties().colors}
                 keyText="体重"
-                value={artistFormState.weight}
+                value={artist?.properties().weight}
                 onChange={(e) =>
-                  setArtistFormState({
-                    ...artistFormState,
+                  setartist?.properties()({
+                    ...artist?.properties(),
                     weight: e.target.value,
                   })
                 }
-                suffix={[artistFormState.weightUnit, ...weightUnits].filter(
-                  (x, i, self) => self.indexOf(x) === i
-                )}
+                suffix={[
+                  artist?.properties().weightUnit,
+                  ...weightUnits,
+                ].filter((x, i, self) => self.indexOf(x) === i)}
                 onChangeSuffix={(e) =>
-                  setArtistFormState({
-                    ...artistFormState,
+                  setartist?.properties()({
+                    ...artist?.properties(),
                     weightUnit: e.target.value as WeightUnit,
                   })
                 }
@@ -199,24 +184,24 @@ const Artist = ({ id }: { id: string }) => {
                 validateFunc={validate.unsignedInt}
               />
               <FormText
-                colors={artistFormState.colors}
+                colors={artist?.properties().colors}
                 keyText="ジェンダー"
-                value={artistFormState.gender}
+                value={artist?.properties().gender}
                 onChange={(e) =>
-                  setArtistFormState({
-                    ...artistFormState,
+                  setartist?.properties()({
+                    ...artist?.properties(),
                     gender: e.target.value,
                   })
                 }
                 validateFunc={validate.artist.gender}
               />
               <FormText
-                colors={artistFormState.colors}
+                colors={artist?.properties().colors}
                 keyText="年齢"
-                value={artistFormState.age}
+                value={artist?.properties().age}
                 onChange={(e) =>
-                  setArtistFormState({
-                    ...artistFormState,
+                  setartist?.properties()({
+                    ...artist?.properties(),
                     age: e.target.value,
                   })
                 }
@@ -225,34 +210,34 @@ const Artist = ({ id }: { id: string }) => {
                 validateFunc={validate.unsignedInt}
               />
               <Birthday
-                colors={artistFormState.colors}
+                colors={artist?.properties().colors}
                 values={[
-                  artistFormState.birthday.year,
-                  artistFormState.birthday.month,
-                  artistFormState.birthday.date,
+                  artist?.properties().birthday.year,
+                  artist?.properties().birthday.month,
+                  artist?.properties().birthday.date,
                 ]}
                 onChanges={[
                   (e) =>
-                    setArtistFormState({
-                      ...artistFormState,
+                    setartist?.properties()({
+                      ...artist?.properties(),
                       birthday: {
-                        ...artistFormState.birthday,
+                        ...artist?.properties().birthday,
                         year: e.target.value,
                       },
                     }),
                   (e) =>
-                    setArtistFormState({
-                      ...artistFormState,
+                    setartist?.properties()({
+                      ...artist?.properties(),
                       birthday: {
-                        ...artistFormState.birthday,
+                        ...artist?.properties().birthday,
                         month: e.target.value,
                       },
                     }),
                   (e) =>
-                    setArtistFormState({
-                      ...artistFormState,
+                    setartist?.properties()({
+                      ...artist?.properties(),
                       birthday: {
-                        ...artistFormState.birthday,
+                        ...artist?.properties().birthday,
                         date: e.target.value,
                       },
                     }),
@@ -261,25 +246,25 @@ const Artist = ({ id }: { id: string }) => {
               />
             </div>
             <FormColor
-              colors={artistFormState.colors}
+              colors={artist?.properties().colors}
               keyText={'テーマカラー'}
-              value={artistFormState.themeHue}
+              value={artist?.properties().themeHue}
               onChange={(value) => {
-                setArtistFormState({
-                  ...artistFormState,
+                setartist?.properties()({
+                  ...artist?.properties(),
                   themeHue: value,
                   colors: getColors(value, false),
                 })
               }}
             />
             {/* <RelatedArtists /> */}
-            <Tags colors={artistFormState.colors} />
-            <HashTags colors={artistFormState.colors} />
+            <Tags colors={artist?.properties().colors} />
+            <HashTags colors={artist?.properties().colors} />
           </div>
         </div>
         {(loading || LoadingUpdate) && (
           <Loading
-            color={artistFormState.colors.themeAA}
+            color={artist?.properties().colors.themeAA}
             className="fixed w-96 m-auto top-0 right-0 bottom-0 left-0"
           />
         )}
@@ -288,12 +273,12 @@ const Artist = ({ id }: { id: string }) => {
         <button
           onClick={() =>
             updateArtist({
-              variables: artistFormToGraphql(artistFormState),
+              variables: artistFormToGraphql(artist?.properties()),
             })
           }
           className="mx-auto p-2 text-2xl text-white border rounded-md opacity-80 hover:opacity-100"
           style={{
-            backgroundColor: artistFormState.colors.themeOppositeAAA,
+            backgroundColor: artist?.properties().colors.themeOppositeAAA,
           }}
         >
           アップデート
@@ -303,7 +288,7 @@ const Artist = ({ id }: { id: string }) => {
           onClick={() => refetch()}
           className="mx-auto p-2 text-2xl text-white border rounded-md opacity-80 hover:opacity-100 ml-4"
           style={{
-            backgroundColor: artistFormState.colors.themeOppositeAAA,
+            backgroundColor: artist?.properties().colors.themeOppositeAAA,
           }}
         >
           リロード
