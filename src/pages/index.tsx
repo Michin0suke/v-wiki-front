@@ -16,7 +16,6 @@ import { ArtistCardType } from '~/model/artist/shared/artist-card'
 import { Colors } from '~/types/colors'
 
 const defaultColors: Colors = {
-  base: '#fff',
   theme: '#f0e5fa',
   themeAA: '#c49bed',
   themeAAA: '#755298',

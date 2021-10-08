@@ -2,7 +2,7 @@ import { gql } from '@apollo/client'
 
 export const QUERY_ARTIST = gql`
   query QueryArtist($id: String!) {
-    artist(id: $id) {
+    findArtistById(id: $id) {
       id
       name
       isV
@@ -19,7 +19,6 @@ export const QUERY_ARTIST = gql`
       heightUnit
       weight
       weightUnit
-      annualIncome
       relatedArtists {
         relatedArtist {
           id
@@ -37,7 +36,6 @@ export const QUERY_ARTIST = gql`
           heightUnit
           weight
           weightUnit
-          annualIncome
         }
         artistRelationType {
           positiveDirectionName

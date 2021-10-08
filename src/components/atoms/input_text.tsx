@@ -29,7 +29,7 @@ export const InputText: React.FC<Props> = ({
       {prefix && (
         <span
           style={{
-            color: colors.base,
+            color: '#fff',
             backgroundColor: colors.themeAA,
           }}
           className="py-1 px-1.5"
@@ -42,7 +42,7 @@ export const InputText: React.FC<Props> = ({
         type="text"
         style={{
           color: colors.themeAAA,
-          backgroundColor: colors.base,
+          backgroundColor: '#fff',
           textAlign,
         }}
         {...{ value, placeholder, onChange }}
@@ -50,7 +50,7 @@ export const InputText: React.FC<Props> = ({
       {suffix && Array.isArray(suffix) === false && (
         <span
           style={{
-            color: colors.base,
+            color: '#fff',
             backgroundColor: colors.themeAA,
           }}
           className="py-1 px-1.5"
@@ -61,7 +61,7 @@ export const InputText: React.FC<Props> = ({
       {suffix && Array.isArray(suffix) && (
         <select
           style={{
-            color: colors.base,
+            color: '#fff',
             backgroundColor: colors.themeAA,
           }}
           className="py-1 px-1.5"

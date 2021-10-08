@@ -1,8 +1,7 @@
 import { gql } from '@apollo/client'
 
-export const UPDATE_ARTIST = gql`
-  mutation UpdateArtist(
-    $id: ID!
+export const CREATE_ARTIST = gql`
+  mutation CreateArtist(
     $name: String
     $isV: Boolean
     $vType: String
@@ -19,9 +18,8 @@ export const UPDATE_ARTIST = gql`
     $weight: Int
     $weightUnit: String
   ) {
-    updateArtist(
+    createArtist(
       data: {
-        id: $id
         name: $name
         isV: $isV
         vType: $vType

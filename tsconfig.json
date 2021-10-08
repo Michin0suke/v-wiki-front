@@ -26,7 +26,7 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx", "src/graphql/dateWithoutTime.ts",
+    "**/*.tsx", "src/graphql/dateWithoutTime.ts", "src/atoms/user-setting.ts#", "src/pages/artist/[id]/edit.tsx#",
   ],
   "exclude": [
     "node_modules",

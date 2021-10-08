@@ -16,7 +16,7 @@ export const MainContents: React.FC<Props> = ({
 }) => {
   return (
     <div
-      style={{ backgroundColor: colors.base }}
+      style={{ backgroundColor: '#fff' }}
       className={`relative mx-auto h-full w-full max-w-2xl ${className}`}
     >
       <div

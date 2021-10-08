@@ -7,7 +7,7 @@
 // GraphQL mutation operation: UpdateArtist
 // ====================================================
 
-export interface UpdateArtist_update {
+export interface UpdateArtist_updateArtist_relatedArtists_relatedArtist {
   __typename: "ArtistGraphql";
   id: string;
   name: string;
@@ -18,18 +18,50 @@ export interface UpdateArtist_update {
   twitterId: string | null;
   gender: string | null;
   profile: string | null;
-  birthday: DateWithoutTime | null;
+  birthday: string | null;
+  age: number | null;
+  height: number | null;
+  heightUnit: string;
+  weight: number | null;
+  weightUnit: string;
+}
+
+export interface UpdateArtist_updateArtist_relatedArtists_artistRelationType {
+  __typename: "ArtistRelationTypeGraphql";
+  positiveDirectionName: string;
+  negativeDirectionName: string;
+}
+
+export interface UpdateArtist_updateArtist_relatedArtists {
+  __typename: "ArtistRelationGraphql";
+  relatedArtist: UpdateArtist_updateArtist_relatedArtists_relatedArtist;
+  artistRelationType: UpdateArtist_updateArtist_relatedArtists_artistRelationType;
+  isPositiveDirection: boolean;
+}
+
+export interface UpdateArtist_updateArtist {
+  __typename: "ArtistGraphql";
+  id: string;
+  name: string;
+  isV: boolean;
+  vType: string;
+  nameRuby: string | null;
+  youtubeChannelId: string | null;
+  twitterId: string | null;
+  gender: string | null;
+  profile: string | null;
+  birthday: string | null;
   age: number | null;
   themeHue: number | null;
   height: number | null;
   heightUnit: string;
   weight: number | null;
   weightUnit: string;
-  annualIncome: number | null;
+  relatedArtists: UpdateArtist_updateArtist_relatedArtists[];
 }
 
 export interface UpdateArtist {
-  update: UpdateArtist_update;
+  updateArtist: UpdateArtist_updateArtist;
 }
 
 export interface UpdateArtistVariables {
@@ -42,12 +74,11 @@ export interface UpdateArtistVariables {
   twitterId?: string | null;
   gender?: string | null;
   profile?: string | null;
-  birthday?: DateWithoutTime | null;
+  birthday?: string | null;
   age?: number | null;
   themeHue?: number | null;
   height?: number | null;
   heightUnit?: string | null;
   weight?: number | null;
   weightUnit?: string | null;
-  annualIncome?: number | null;
 }

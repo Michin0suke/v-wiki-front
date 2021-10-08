@@ -47,7 +47,7 @@ export const RelatedArtists: React.FC<Props> = ({
         <div
           className="p-2 rounded"
           style={{
-            backgroundColor: colors.base,
+            backgroundColor: '#fff',
           }}
         >
           <FormSelect
@@ -65,7 +65,7 @@ export const RelatedArtists: React.FC<Props> = ({
         <div
           className="mt-2 p-2 rounded"
           style={{
-            backgroundColor: colors.base,
+            backgroundColor: '#fff',
           }}
         >
           <FormText

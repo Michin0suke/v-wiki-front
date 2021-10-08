@@ -39,7 +39,7 @@ export const FormColor: React.FC<Props> = ({
           max={360}
           showTooltip={true}
           onChange={onChange}
-          progressColor={colors.base}
+          progressColor={'#fff'}
           tooltipColor={colors.themeAAA}
           knobColor={colors.themeAA}
         />

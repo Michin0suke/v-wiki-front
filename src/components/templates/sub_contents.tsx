@@ -14,7 +14,7 @@ export const SubContents: React.FC<Props> = ({
 }) => {
   return (
     <div
-      style={{ backgroundColor: colors.base }}
+      style={{ backgroundColor: '#fff' }}
       className={`relative h-full min-h-screen flex-1 p-5 rounded-lg ${className}`}
     >
       {children}

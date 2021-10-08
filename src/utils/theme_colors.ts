@@ -12,6 +12,7 @@ const getChromaFromHue = (
   let left = 0
   let right = 1
   let count = 0
+
   while (right - left > 0.01) {
     const middle = Math.floor(((left + right) / 2) * 100) / 100
     const color = chroma(hue, saturation, middle, 'hsl')
@@ -23,6 +24,7 @@ const getChromaFromHue = (
     if (count > 5) break
     count += 1
   }
+
   return chroma(hue, saturation, left, 'hsl')
 }
 

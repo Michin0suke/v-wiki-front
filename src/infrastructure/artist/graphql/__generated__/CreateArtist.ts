@@ -4,10 +4,10 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: QueryArtists
+// GraphQL mutation operation: CreateArtist
 // ====================================================
 
-export interface QueryArtists_artists_relatedArtists_relatedArtist {
+export interface CreateArtist_createArtist_relatedArtists_relatedArtist {
   __typename: "ArtistGraphql";
   id: string;
   name: string;
@@ -18,29 +18,28 @@ export interface QueryArtists_artists_relatedArtists_relatedArtist {
   twitterId: string | null;
   gender: string | null;
   profile: string | null;
-  birthday: DateWithoutTime | null;
+  birthday: string | null;
   age: number | null;
   height: number | null;
   heightUnit: string;
   weight: number | null;
   weightUnit: string;
-  annualIncome: number | null;
 }
 
-export interface QueryArtists_artists_relatedArtists_artistRelationType {
+export interface CreateArtist_createArtist_relatedArtists_artistRelationType {
   __typename: "ArtistRelationTypeGraphql";
   positiveDirectionName: string;
   negativeDirectionName: string;
 }
 
-export interface QueryArtists_artists_relatedArtists {
+export interface CreateArtist_createArtist_relatedArtists {
   __typename: "ArtistRelationGraphql";
-  relatedArtist: QueryArtists_artists_relatedArtists_relatedArtist;
-  artistRelationType: QueryArtists_artists_relatedArtists_artistRelationType;
+  relatedArtist: CreateArtist_createArtist_relatedArtists_relatedArtist;
+  artistRelationType: CreateArtist_createArtist_relatedArtists_artistRelationType;
   isPositiveDirection: boolean;
 }
 
-export interface QueryArtists_artists {
+export interface CreateArtist_createArtist {
   __typename: "ArtistGraphql";
   id: string;
   name: string;
@@ -51,17 +50,34 @@ export interface QueryArtists_artists {
   twitterId: string | null;
   gender: string | null;
   profile: string | null;
-  birthday: DateWithoutTime | null;
+  birthday: string | null;
   age: number | null;
   themeHue: number | null;
   height: number | null;
   heightUnit: string;
   weight: number | null;
   weightUnit: string;
-  annualIncome: number | null;
-  relatedArtists: QueryArtists_artists_relatedArtists[];
+  relatedArtists: CreateArtist_createArtist_relatedArtists[];
 }
 
-export interface QueryArtists {
-  artists: QueryArtists_artists[];
+export interface CreateArtist {
+  createArtist: CreateArtist_createArtist;
+}
+
+export interface CreateArtistVariables {
+  name?: string | null;
+  isV?: boolean | null;
+  vType?: string | null;
+  nameRuby?: string | null;
+  youtubeChannelId?: string | null;
+  twitterId?: string | null;
+  gender?: string | null;
+  profile?: string | null;
+  birthday?: string | null;
+  age?: number | null;
+  themeHue?: number | null;
+  height?: number | null;
+  heightUnit?: string | null;
+  weight?: number | null;
+  weightUnit?: string | null;
 }
